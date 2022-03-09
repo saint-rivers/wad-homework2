@@ -1,0 +1,13 @@
+li {
+  font-size: 1.3rem;
+}
+
+li > a {
+  padding: 20px 30px;
+  vertical-align: middle;
+}
+
+li > a:hover {
+  background-color: cornflowerblue;
+  color: white;
+}
