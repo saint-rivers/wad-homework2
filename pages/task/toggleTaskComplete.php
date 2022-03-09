@@ -1,6 +1,6 @@
 <?php
 
-include "config.php";
+include "../config/config.php";
 
 if (isset($_POST['id'])) {
     $task_id = $_POST['id'];

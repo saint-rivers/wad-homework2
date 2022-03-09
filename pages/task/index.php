@@ -1,11 +1,11 @@
 <?php
-include "config.php";
+include "../config/config.php";
 $sql = "SELECT * FROM tasks;";
 $result = $conn->query($sql);
 ?>
 
 <?php
-include "config.php";
+include "../config/config.php";
 
 if (isset($_POST['submit'])) {
   $name = $_POST['task-name'];
