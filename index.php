@@ -14,9 +14,9 @@
   <ul class="flex flex-row">
     <li><a href="/pages/task/index.php">Tasks</a></li>
     <li><a href="/pages/project/projects.php">Projects</a></li>
-    <li><a href="#">Users</a></li>
-    <li><a href="#">Login</a></li>
-    <li><a href="#">Sign Up</a></li>
+    <li><a href="/pages/user/index.php">Users</a></li>
+    <!-- <li><a href="#">Login</a></li> -->
+    <li><a href="/pages/user/register.php">Sign Up</a></li>
   </ul>
 </body>
 

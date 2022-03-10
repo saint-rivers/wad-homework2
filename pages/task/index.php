@@ -1,7 +1,27 @@
 <?php
 include "../config/config.php";
-$sql = "SELECT * FROM tasks;";
+
+$project_id = $_GET["project"];
+
+$sql = "SELECT * FROM projects WHERE id = $project_id;";
+$project_results = $conn->query($sql);
+// echo $sql;
+$project_name = "";
+if ($project_results->num_rows > 0) {
+  while ($row = $project_results->fetch_assoc()) {
+    $project_name = $row["name"];
+  }
+}
+
+$sql = "SELECT * FROM tasks WHERE project_id = $project_id;";
 $result = $conn->query($sql);
+// if ($result->num_rows > 0) {
+//   while ($row = $result->fetch_assoc()) {
+//   echo $row["name"];
+//   }
+// }
+
+
 ?>
 
 <?php
@@ -11,7 +31,7 @@ if (isset($_POST['submit'])) {
   $name = $_POST['task-name'];
   echo $name;
 
-  $sql = "INSERT INTO `tasks`(`name`, `is_completed`) VALUES ('$name','0')";
+  $sql = "INSERT INTO `tasks`(`name`, `is_completed`, `project_id`) VALUES ('$name','0', '$project_id')";
 
   $result = $conn->query($sql);
   if ($result == TRUE) {
@@ -21,7 +41,7 @@ if (isset($_POST['submit'])) {
   }
 
   $conn->close();
-  header('Location: index.php');
+  header('Location: index.php?project=' . $project_id);
 }
 ?>
 <!DOCTYPE html>
@@ -40,7 +60,10 @@ if (isset($_POST['submit'])) {
   <div class="" id="page-content">
 
     <div class="m-12 flex flex-col">
-      <h4 class="font-bold text-2xl">{{Project Title}}</h4>
+      <a href="/pages/project/projects.php" class="mr-auto">back</a>
+      <h4 class="font-bold text-2xl">
+        <?php echo $project_name; ?>
+      </h4>
       <form action="" method="POST">
         <div class="my-4 flex flex-row w-full justify-between">
           <input autofocus type="text" name="task-name" class="flex-1 rounded bg-gray-50 border border-gray-400 px-3 py-2 w-5/6 mr-4" placeholder="What do you need to do today?">
@@ -70,14 +93,14 @@ if (isset($_POST['submit'])) {
               <li class="flex flex-row">
                 <label class="flex-1 task-toggle" onclick="toggleComplete('<?php echo $row['id']; ?>', '<?php echo $row['is_completed']; ?>');">
                   <div class="border-b">
-                    <input class="accent-blue-teal-500 my-4" type="checkbox" <?php echo ($row['is_completed'] == 1 ? 'checked' : ''); ?>>
-                    <?php echo $row['name']; ?>
-                    <i class="input-helper"></i>
+                    <input type="checkbox" class="accent-blue-teal-500 my-4" <?php echo ($row['is_completed'] == 1 ? 'checked' : ''); ?>>
+                    <p class="inline-block" name="task-name-display">
+                      <?php echo $row['name']; ?>
+                    </p>
                   </div>
-                  <i class="remove mdi mdi-close-circle-outline"></i>
                 </label>
-                <a href="delete.php?id=<?php echo $row['id']; ?>" class="flex bg-yellow-500 inline-block px-3 py-2 rounded m-1">Edit</a>
-                <a href="delete.php?id=<?php echo $row['id']; ?>" class="flex bg-red-500 inline-block px-3 py-2 rounded m-1">Delete</a>
+                <!-- <a href="#" id="edit-btn-<?php echo $row['id']; ?>" class="flex bg-yellow-500 inline-block px-3 py-2 rounded m-1">Edit</a> -->
+                <a href="delete.php?id=<?php echo $row['id']; ?>&project=<?php echo $row['project_id']; ?>" class="flex bg-red-500 inline-block px-3 py-2 rounded m-1">Delete</a>
               </li>
           <?php
             }
@@ -104,6 +127,10 @@ if (isset($_POST['submit'])) {
       }
     });
   }
+  // $("input[name='task-name-display']").css("display", "none");
+  $("input[name='edit-btn']").on("click", function() {
+    $("input[name='task-name-display']").css("display", "none");
+  });
 </script>
 
 </html>
