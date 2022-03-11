@@ -1,6 +1,6 @@
 <?php
 
-include "config.php";
+include "../config/config.php";
 
 if (isset($_POST['update'])) {
 
@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
 
         <h2>User Update Form</h2>
 
-        <a href="/index.php">View Users</a>
+        <a href="./index.php">View Users</a>
         <form action="" method="post">
 
             <fieldset>

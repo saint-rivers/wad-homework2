@@ -18,18 +18,31 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-  <!-- Button trigger modal -->
-  <!-- <div class="container">
-    <div class="row">
-      <div class="col text-center mr-auto">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          New Project
-        </button>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">Project Manager</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/pages/task/index.php">Tasks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pages/project/projects.php">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pages/user/index.php">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pages/user/register.php">Sign Up</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </div> -->
-
-
+  </nav>
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -52,19 +65,18 @@ $result = $conn->query($sql);
     </div>
   </div>
 
-
-  <div class="container w-75">
-
+  <div class="container w-75 mt-4">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
       New Project
     </button>
   </div>
-  <div class="d-flex flex-wrap justify-content-between container">
+
+  <div class="d-flex flex-wrap mx-auto container">
     <?php
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
     ?>
-        <div class="card mx-4 my-2" style="width: 18rem;">
+        <div class="card mx-2 my-2" style="width: 18rem;">
           <div class="card-body bg-white w-75 mx-auto">
             <h5 class="card-title"><?php echo $row["name"] ?></h5>
             <p class="card-text"><?php echo $row["name"] ?></p>
@@ -76,6 +88,8 @@ $result = $conn->query($sql);
     }
     ?>
   </div>
+
+
 </body>
 
 <!-- JavaScript Bundle with Popper -->

@@ -1,47 +1,24 @@
-<?php
-
-include "config.php";
-
-if (isset($_POST['submit'])) {
-
-    $first_name = $_POST['firstname'];
-
-    $last_name = $_POST['lastname'];
-
-    $email = $_POST['email'];
-
-    $password = $_POST['password'];
-
-    $gender = $_POST['gender'];
-
-    $sql = "INSERT INTO `users`(`firstname`, `lastname`, `email`, `password`, `gender`) VALUES ('$first_name','$last_name','$email','$password','$gender')";
-
-    $result = $conn->query($sql);
-
-    if ($result == TRUE) {
-
-        echo "New record created successfully.";
-    } else {
-
-        echo "Error:" . $sql . "<br>" . $conn->error;
-    }
-
-    $conn->close();
-}
-
-?>
 
 <!DOCTYPE html>
 
 <html>
 
+<head>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Register</title>
+</head>
+
 <body>
 
-    <h2>Signup Form</h2>
+    <div class="container">
+        <h2>Signup Form</h2>
 
-    <a href="/index.php">View Users</a>
+        <a href="/pages/user/index.php">View Users</a>
+    </div>
 
-    <form action="" method="POST">
+    <form action="" method="POST" class="container">
 
         <fieldset>
 
